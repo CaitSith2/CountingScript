@@ -1,0 +1,10 @@
+// ==UserScript==
+// @name     Counting utilities v3
+// @author   Counters LTD
+// @version  1000002
+// @grant    none
+// @include  *animebytes.tv/forums.php*threadid=556*
+// @include  *animebyt.es/forums.php*threadid=556*
+// @icon     http://animebytes.tv/favicon.ico
+// ==/UserScript==
+

@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "esModuleInterop": true,
+        "target": "es6",
+        "moduleResolution": "node",
+        "removeComments": false,
+        "preserveConstEnums": true,
+        "outDir": "./build",
+        //"outFile":"./build/build.js",
+        "sourceMap": true,
+        "noImplicitAny": false,
+    },
+    "lib": ["es2015"],
+    "include": ["src/**/*"],
+    "exclude": ["node_modules", "**/*.spec.ts", "build"]
+}
