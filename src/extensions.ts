@@ -28,11 +28,6 @@ Array.prototype.isPalindrome = function<T>(): boolean {
     return true;
 }
 
-console.log([1, 2, 3, 2, 1].isPalindrome());
-console.log([1, 2, 2, 1].isPalindrome());
-console.log([1, 2, 3, 2].isPalindrome());
-console.log([1, 2, 3].isPalindrome());
-
 String.prototype.bbSize = function(size: number): string {
     return "[size=" + size + "]" + this.toString() + "[/size]";
 }

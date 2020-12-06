@@ -13,9 +13,7 @@ class State {
     postCount: number = NaN;
 
     constructor() {
-        this.textBox = document.querySelector("#quickpost") as HTMLTextAreaElement;
-        this.submitButton = document.querySelector("#post_button") as HTMLInputElement;
-        this.quickPostForm = document.querySelector("#quickpostform") as HTMLFormElement;
+        this.UpdateElems();
         let pageNumbers = document.querySelector(".pagenums");
         let posts = document.querySelectorAll(".post_block");
         
@@ -36,6 +34,12 @@ class State {
         this.layoutDiv = Utils.HTMLNodeFromText("<div style='display: block;text-align: center;padding:10px 10px 10px 10px;' class='' id='utilityButtons'></div>") as HTMLDivElement;
     }
 
+    private UpdateElems(): void {
+        this.textBox = document.querySelector("#quickpost") as HTMLTextAreaElement;
+        this.submitButton = document.querySelector("#post_button") as HTMLInputElement;
+        this.quickPostForm = document.querySelector("#quickpostform") as HTMLFormElement;
+    }
+
     OnLastPage(): boolean {
         return this.currentPageNum === this.lastPageNum;
     }
@@ -48,23 +52,26 @@ class State {
     }
 
     AppendText(text: string): void {
+        this.UpdateElems();
         if (this.textBox)
-            this.textBox.textContent = this.textBox.textContent + text;
+            this.textBox.value = this.textBox.value + text;
     }
 
     FocusToText(): void {
+        this.UpdateElems();
         if (this.textBox)
             this.textBox.focus();
     }
 
     SubmitText(): void {
+        this.UpdateElems();
         if (this.submitButton)
             this.submitButton.click();
     }
 
     InsertElementLayout(layout: Element[][]): void {
+        this.UpdateElems();
         let br = Utils.HTMLNodeFromText("<br style='display:block;margin:5px;0'/>") as HTMLBRElement;
-
         
         layout.forEach((row, rowIndex) => {
             let startLength = this.layoutDiv.childNodes.length;
@@ -137,7 +144,6 @@ let customNumberInput = new NumberInput(
 let fancyCustomNumButton = new Button(
     "Custom Fancy",
     () => {
-        console.log(NumberInput.GetInput("customNumberInput"));
         FancyAppend(NumberInput.GetInput("customNumberInput"));
     },
     "fancyCustomNumButton",
@@ -160,8 +166,6 @@ let quickTextInsertButton = new Button(
             state.AppendText(selection.value);
         else if (typeof selection.value === "function")
             state.AppendText(selection.value());
-        
-        console.log(selection.value);
         
         state.FocusToText();
     },
@@ -238,7 +242,6 @@ state.InsertElementLayout(layout);
 function FancyAppend(num?: number): void {
     if (!num)
         num = state.NextNumber();
-    console.log(Utils.GetFancyText(num, Config.defaultConfig));
     state.AppendText(Utils.GetFancyText(num, Config.defaultConfig) + "\n\n");
     state.FocusToText();
 }
