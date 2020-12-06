@@ -10,7 +10,8 @@ export interface Config {
     fancyDigitConfig: FancyDigitConfig;
     nices: string[];
     newPageEmojis: string[];
-    quickTexts: {text: string, value: string | {(): string}}[]
+    quickTexts: {text: string, value: string | {(): string}}[];
+    testing: boolean;
 };
 
 export let digitChooserPresets = [
@@ -125,5 +126,6 @@ export let defaultConfig: Config = {
         {text: "test", value: "this is a test"},
         {text: "test2", value: () => { return "this is also a test"; }},
     ],
+    testing: false,
 };
 Object.freeze(defaultConfig);

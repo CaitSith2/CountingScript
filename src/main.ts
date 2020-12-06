@@ -98,8 +98,36 @@ class State {
     }
 };
 
-let config = Config.defaultConfig;
+let config = Object.assign({}, Config.defaultConfig);
 let state = new State();
+
+{
+    let digits_digitSetPresets: number[] | undefined = GM_getValue("digits_digitSetPresets", undefined);
+    let digits_hoverText: string | undefined = GM_getValue("digits_hoverText", undefined);
+    let digits_url: string | undefined = GM_getValue("digits_url", undefined);
+    let digits_digitChooserPreset: number | undefined = GM_getValue("digits_digitChooserPreset", undefined);
+    let digits_digitBase: number | undefined = GM_getValue("digits_digitBase", undefined);
+    let nices: string[] | undefined = GM_getValue("nices", undefined);
+    let npEmojis: string[] | undefined = GM_getValue("npEmojis", undefined);
+    let quickTexts: string[][] | undefined = GM_getValue("quickTexts", undefined);
+
+    if (digits_digitSetPresets !== undefined) {
+        config.fancyDigitConfig.digitSets = [];
+        digits_digitSetPresets.forEach(val => config.fancyDigitConfig.digitSets.push(Config.digitSetPresets[val]));
+    }
+
+    if (digits_hoverText !== undefined) config.fancyDigitConfig.hoverText = digits_hoverText;
+    if (digits_url !== undefined) config.fancyDigitConfig.url = digits_url;
+    if (digits_digitChooserPreset !== undefined) config.fancyDigitConfig.digitChooser = Config.digitChooserPresets[digits_digitChooserPreset];
+    if (digits_digitBase !== undefined) config.fancyDigitConfig.digitBase = digits_digitBase;
+    if (nices !== undefined) config.nices = nices;
+    if (npEmojis !== undefined) config.newPageEmojis = npEmojis;
+
+    if (quickTexts !== undefined) {
+        config.quickTexts = [];
+        quickTexts.forEach(val => config.quickTexts.push({text: val[0], value: val[1]}));
+    }
+}
 
 function DummyParagraph() {
     return new Paragraph("dummy string");
@@ -233,10 +261,13 @@ let layout: Element[][] = [
     [nextNumButton, fancyNextNumButton, quickNumButton],
     [customNumberInput, fancyCustomNumButton],
     [quickTextSelection, quickTextInsertButton],
-    [cerfeTestButton, hennuskTestButton],
     [nextUniqueNumbersParagraph],
     [timeLeftParagraph],
 ];
+
+if (config.testing) {
+    layout.push([cerfeTestButton, hennuskTestButton]);
+}
 state.InsertElementLayout(layout);
 
 function FancyAppend(num?: number): void {

@@ -2,9 +2,29 @@
 // @name     Counting utilities v3
 // @author   Counters LTD
 // @version  1000002
-// @grant    none
 // @include  *animebytes.tv/forums.php*threadid=556*
 // @include  *animebyt.es/forums.php*threadid=556*
 // @icon     http://animebytes.tv/favicon.ico
+// @grant        GM_setValue
+// @grant        GM_getValue
+// @grant        GM_deleteValue
 // ==/UserScript==
+
+/*
+configuration explanation:
+    applies to all of them:
+        set values to `undefined` to leave them at their default values
+    
+    ///TODO: write the explanation for the rest of them
+*/
+
+//configure below
+GM_setValue("digits_digitSetPresets", [0]);
+GM_setValue("digits_hoverText", "Click me for cool music");
+GM_setValue("digits_url", "https://www.youtube.com/watch?v=cPCLFtxpadE");
+GM_setValue("digits_digitChooserPreset", 0);
+GM_setValue("digits_digitBase", 10);
+GM_setValue("nices", undefined);
+GM_setValue("npEmojis", undefined);
+GM_setValue("quickTexts", [["asd", "asd"], ["asdf", "asdf"]]);
 
